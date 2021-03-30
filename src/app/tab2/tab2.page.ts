@@ -31,15 +31,25 @@ export class Tab2Page {
 
   upload(a){
     this.urlImageStorage=[];
-    const imgFilepath = `imgStorage/${this.fotoService.dataFoto[a].filePath}`;
-      this.afStorage.upload(imgFilepath, this.fotoService.dataFoto[a].dataImage).then(() =>{
-        this.afStorage.storage.ref().child(imgFilepath).getDownloadURL().then((url) => {
+    // const imgFilepath = `imgStorage/${this.fotoService.dataFoto[a].filePath}`;
+    //   this.afStorage.upload(imgFilepath, this.fotoService.dataFoto[a].dataImage).then(() =>{
+    //     this.afStorage.storage.ref().child(imgFilepath).getDownloadURL().then((url) => {
           
-          var hslfoto = {filePath:url.toString()}
-          this.urlImageStorage.unshift(hslfoto);
-          console.log(this.fotoService.dataFoto[a].filePath);
+    //       //var hslfoto = {filePath:url.toString()}
+    //       this.urlImageStorage.unshift(url);
+    //       console.log(this.fotoService.dataFoto[a].filePath);
+    //     });
+    //   });
+
+    for(var index in this.fotoService.dataFoto){
+      const imgFilepath = `imgStorage/${this.fotoService.dataFoto[index].filePath}`;
+      this.afStorage.upload(imgFilepath, this.fotoService.dataFoto[index].dataImage).then(() =>{
+        this.afStorage.storage.ref().child(imgFilepath).getDownloadURL().then((url) => {
+          this.urlImageStorage.unshift(url);
+          console.log(url);
         });
       });
+    }
   }
 }
 
