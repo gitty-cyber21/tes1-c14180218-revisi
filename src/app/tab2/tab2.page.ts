@@ -14,7 +14,7 @@ import { identifierModuleUrl } from '@angular/compiler';
 export class Tab2Page {
 
   urlImageStorage : Photo[] =  [];
-  datatemp : Photo[] = [];
+  datatemp : check[] = [];
   myBoolean = false;
 
   constructor(
@@ -31,36 +31,38 @@ export class Tab2Page {
   }
 
   tambah(t){
-    
-    
+    this.myBoolean = true; 
+    alert(this.myBoolean);
   }
 
 
 
-  upload(){
-    // this.urlImageStorage=[];
-    // alert(t);
-    // const imgFilepath = `imgStorage/${this.fotoService.dataFoto[t].filePath}`;
-    //   this.afStorage.upload(imgFilepath, this.fotoService.dataFoto[t].dataImage).then(() =>{
-    //     this.afStorage.storage.ref().child(imgFilepath).getDownloadURL().then((url) => {
+  upload(t){
+    this.urlImageStorage=[];
+    const imgFilepath = `imgStorage/${this.fotoService.dataFoto[t].filePath}`;
+      this.afStorage.upload(imgFilepath, this.fotoService.dataFoto[t].dataImage).then(() =>{
+        this.afStorage.storage.ref().child(imgFilepath).getDownloadURL().then((url) => {
           
-    //       this.urlImageStorage.unshift(url);
-    //       console.log(this.fotoService.dataFoto[t].filePath);
-    //     });
-    //   });
-
-    for(var index in this.fotoService.dataFoto){
-      if(this.myBoolean == true){
-        const imgFilepath = `imgStorage/${this.fotoService.dataFoto[index].filePath}`;
-        this.afStorage.upload(imgFilepath, this.fotoService.dataFoto[index].dataImage).then(() =>{
-          this.afStorage.storage.ref().child(imgFilepath).getDownloadURL().then((url) => {
-            this.urlImageStorage.unshift(url);
-            console.log(url);
-          });
+          this.urlImageStorage.unshift(url);
+          console.log(this.fotoService.dataFoto[t].filePath);
         });
-      }
+      });
+
+    // for(var index in this.fotoService.dataFoto){
+    //   if(this.myBoolean == true){
+    //     const imgFilepath = `imgStorage/${this.fotoService.dataFoto[index].filePath}`;
+    //     this.afStorage.upload(imgFilepath, this.fotoService.dataFoto[index].dataImage).then(() =>{
+    //       this.afStorage.storage.ref().child(imgFilepath).getDownloadURL().then((url) => {
+    //         this.urlImageStorage.unshift(url);
+    //         console.log(url);
+    //       });
+    //     });
+    //   }
      
-    }
+    // }
+
+    
+
   }
 }
 
@@ -68,4 +70,8 @@ export interface Photo {
   filePath : string;
   webviewPath : string;
   dataImage : File;
+}
+
+export interface check{
+  myBool : boolean;
 }
