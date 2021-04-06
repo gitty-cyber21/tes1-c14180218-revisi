@@ -11,13 +11,12 @@
     <ion-row>
       <ion-col size = "6" *ngFor="let isiFoto of fotoService.dataFoto; let t = index"> 
       <ion-img [src]= isiFoto.webviewPath></ion-img>
-      <ion-button color = "warning" (click)="upload(t)">Upload</ion-button>
-      <!-- <ion-button color="primary" (click)="tambah(t)">Select</ion-button> -->
+      <ion-checkbox color="primary" (ionChange) = "tambah(t)"></ion-checkbox>
       </ion-col>
     </ion-row>
   </ion-grid>
 
-   
+  <ion-button color = "warning" (click)="upload()" [fullscreen]="true">Upload</ion-button>
 
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
     <ion-fab-button (click) = "TambahFoto()">

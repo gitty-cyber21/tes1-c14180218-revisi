@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FotoService } from '../services/foto.service';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { identifierModuleUrl } from '@angular/compiler';
 
 @Component({
   selector: 'app-tab2',
@@ -14,6 +15,7 @@ export class Tab2Page {
 
   urlImageStorage : Photo[] =  [];
   datatemp : Photo[] = [];
+  myBoolean = false;
 
   constructor(
     private afStorage : AngularFireStorage,
@@ -30,30 +32,35 @@ export class Tab2Page {
 
   tambah(t){
     
-    // this.fotoService.dataFoto[t] = this.datatemp[t];
+    
   }
 
-  upload(t){
-    this.urlImageStorage=[];
-    alert(t);
-    const imgFilepath = `imgStorage/${this.fotoService.dataFoto[t].filePath}`;
-      this.afStorage.upload(imgFilepath, this.fotoService.dataFoto[t].dataImage).then(() =>{
-        this.afStorage.storage.ref().child(imgFilepath).getDownloadURL().then((url) => {
-          
-          this.urlImageStorage.unshift(url);
-          console.log(this.fotoService.dataFoto[t].filePath);
-        });
-      });
 
-    // for(var index in this.fotoService.dataFoto){
-    //   const imgFilepath = `imgStorage/${this.fotoService.dataFoto[index].filePath}`;
-    //   this.afStorage.upload(imgFilepath, this.fotoService.dataFoto[index].dataImage).then(() =>{
+
+  upload(){
+    // this.urlImageStorage=[];
+    // alert(t);
+    // const imgFilepath = `imgStorage/${this.fotoService.dataFoto[t].filePath}`;
+    //   this.afStorage.upload(imgFilepath, this.fotoService.dataFoto[t].dataImage).then(() =>{
     //     this.afStorage.storage.ref().child(imgFilepath).getDownloadURL().then((url) => {
+          
     //       this.urlImageStorage.unshift(url);
-    //       console.log(url);
+    //       console.log(this.fotoService.dataFoto[t].filePath);
     //     });
     //   });
-    // }
+
+    for(var index in this.fotoService.dataFoto){
+      if(this.myBoolean == true){
+        const imgFilepath = `imgStorage/${this.fotoService.dataFoto[index].filePath}`;
+        this.afStorage.upload(imgFilepath, this.fotoService.dataFoto[index].dataImage).then(() =>{
+          this.afStorage.storage.ref().child(imgFilepath).getDownloadURL().then((url) => {
+            this.urlImageStorage.unshift(url);
+            console.log(url);
+          });
+        });
+      }
+     
+    }
   }
 }
 
