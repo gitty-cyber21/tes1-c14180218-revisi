@@ -40,7 +40,6 @@ export class Tab2Page {
       this.afStorage.upload(imgFilepath, this.fotoService.dataFoto[t].dataImage).then(() =>{
         this.afStorage.storage.ref().child(imgFilepath).getDownloadURL().then((url) => {
           
-          //var hslfoto = {filePath:url.toString()}
           this.urlImageStorage.unshift(url);
           console.log(this.fotoService.dataFoto[t].filePath);
         });
