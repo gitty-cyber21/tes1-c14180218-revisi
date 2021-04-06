@@ -10,6 +10,7 @@ const{Camera, Filesystem, Storage} = Plugins;
 export class FotoService {
 
   public dataFoto : Photo[] = [];
+  
   private keyfoto : string = "foto";
   private platform : Platform;
 
